@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Builder
 @Data
@@ -11,21 +12,27 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class StoryDTO {
 
-    @JsonProperty("author")
-    private String author;
-
-    //private String _tags;
+    @JsonProperty("created_at")
+    private LocalDateTime createdAt;
 
     @JsonProperty("title")
     private String title;
 
-    //    private LocalDateTime createdAt;
-    @JsonProperty("created_at")
-    private String createdAt;
+    @JsonProperty("author")
+    private String author;
 
-  //  private String storyTitle;
+    @JsonProperty("_tags")
+    private List<String> _tags;
 
+    @JsonProperty("url")
+    private String url;
 
+    @JsonProperty("comment_text")
+    private String commentText;
 
+    @JsonProperty("story_id")
+    private Integer storyId;
 
+    @JsonProperty("story_title")
+    private String storyTitle;
 }

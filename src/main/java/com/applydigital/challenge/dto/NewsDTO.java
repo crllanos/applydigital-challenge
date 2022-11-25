@@ -3,7 +3,7 @@ package com.applydigital.challenge.dto;
 import com.google.gson.annotations.SerializedName;
 import lombok.*;
 
-import java.util.Collection;
+import java.util.List;
 
 @Builder
 @Data
@@ -12,6 +12,6 @@ import java.util.Collection;
 public class NewsDTO {
 
     @SerializedName("hits")
-    private Collection<StoryDTO> hits;
+    private List<StoryDTO> hits;
 
 }

@@ -1,6 +1,18 @@
+spring:
+  datasource:
+    url: "jdbc:postgresql://localhost:5432/postgres"
+    username:
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: create
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+
 feign:
   hackernews:
     url: https://hn.algolia.com/api/v1
+
 
 logging:
   level:
