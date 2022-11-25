@@ -1,0 +1,9 @@
+feign:
+  hackernews:
+    url: https://hn.algolia.com/api/v1
+
+logging:
+  level:
+    com:
+      applydigital: DEBUG
+
