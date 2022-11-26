@@ -46,8 +46,7 @@ public class HackNewsController {
          * - OK a REST API
          * - OK filtered by author, _tags, title
          * - OK The whole project has to be uploaded to Gitlab
-
-         * - WIP searchable by month word (e.g. september) using the “created_at” field.
+         * - OK searchable by month word (e.g. september) using the “created_at” field.
 
          * - paginated results with a maximum of 5 >>> @todo adds full stacktrace (npi)
          * - At least 30% test coverage (statements) for the server component
@@ -109,8 +108,20 @@ public class HackNewsController {
         return response;
     }
 
-    //@GetMapping(value = "/byMonth/{month}" ,params = { "page", "size" })
-    //public
+    @GetMapping(value = "/byMonth/{month}" ,params = { "page", "size" })
+    public Page<StoryEntity> listStoriesByMonth(@PathVariable("month") String month,
+                                              @RequestParam("page") int page,
+                                              @RequestParam("size")
+                                              @Min(value = 1, message = "min size: 1")
+                                              @Max(value = 5, message = "max size: 5")
+                                              int size){
+        log.info("GET /api/v1/hacknews/byMonth/{} page: {}, size: {}", month, page, size);
+        Page<StoryEntity> response = hackNewsService.listStoriesByMonth(month, page, size);
+        log.info("Response /api/v1/hacknews/byMonth/{}: {}", month, util.objToJson(response));
+
+        return response;
+
+    }
 
     //@DeleteMapping(value = "/{id}")
 }

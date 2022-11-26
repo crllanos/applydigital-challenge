@@ -14,5 +14,6 @@ public class HackNewsException extends RuntimeException {
 
     private HttpStatus status;
     private String message;
+    private Throwable e;
 
 }

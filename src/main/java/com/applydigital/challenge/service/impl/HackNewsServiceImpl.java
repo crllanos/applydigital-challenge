@@ -1,9 +1,11 @@
 package com.applydigital.challenge.service.impl;
 
 import com.applydigital.challenge.Util;
+import com.applydigital.challenge.client.HackerNewsClient;
 import com.applydigital.challenge.client.HackerNewsClientMock;
 import com.applydigital.challenge.dto.NewsDTO;
 import com.applydigital.challenge.dto.StoryDTO;
+import com.applydigital.challenge.exception.HackNewsException;
 import com.applydigital.challenge.repository.StoryRepository;
 import com.applydigital.challenge.repository.entity.StoryEntity;
 import com.applydigital.challenge.service.HackNewsService;
@@ -13,20 +15,16 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
-import javax.persistence.EntityNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.time.Month;
 
 @Service
 @Slf4j
 @RequiredArgsConstructor
 public class HackNewsServiceImpl implements HackNewsService {
 
-    //private final HackerNewsClient hackerNewsClient; // @fixme mock
-
-    private final HackerNewsClientMock hackerNewsClient;
+    private final HackerNewsClient hackerNewsClient;
 
     private final StoryRepository storyRepository;
 
@@ -38,7 +36,7 @@ public class HackNewsServiceImpl implements HackNewsService {
      * @return NewsDTO
      */
     //@Scheduled(cron = "0 * * * *") @fixme cron
-    @Scheduled(fixedDelay = 3000)
+    @Scheduled(fixedDelay = 30000)
     @Override
     public NewsDTO fetchNews(){
         NewsDTO newsDTO = hackerNewsClient.fetchNews();
@@ -47,7 +45,7 @@ public class HackNewsServiceImpl implements HackNewsService {
             storyRepository.save(StoryEntity.builder()
                     .title(s.getTitle())
                     .author(s.getAuthor())
-                    .tags(String.join(",", s.getTags()))
+                    .tags( (!ObjectUtils.isEmpty(s.getTags()) ? String.join(",", s.getTags()) : null) )
                     .createdAt(s.getCreatedAt())
                     .url(s.getUrl())
                     .storyId(s.getStoryId())
@@ -74,8 +72,13 @@ public class HackNewsServiceImpl implements HackNewsService {
     }
 
     @Override
-    public Page<StoryEntity> listStoriesByMonth(String month) {
-        return null;
+    public Page<StoryEntity> listStoriesByMonth(String month, int page, int size) {
+        try{
+            Month m = Month.valueOf(month.toUpperCase());
+            return storyRepository.findStoriesByMonth(m.getValue(), PageRequest.of(page, size));
+        }catch (Exception e){
+            throw new IllegalArgumentException(e);
+        }
     }
 
 }

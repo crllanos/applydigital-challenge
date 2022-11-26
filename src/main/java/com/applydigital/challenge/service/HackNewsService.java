@@ -19,6 +19,6 @@ public interface HackNewsService {
 
     Page<StoryEntity> listStoriesByTitle(String title, int page, int size);
 
-    Page<StoryEntity> listStoriesByMonth(String month);
+    Page<StoryEntity> listStoriesByMonth(String month, int page, int size);
 
 }

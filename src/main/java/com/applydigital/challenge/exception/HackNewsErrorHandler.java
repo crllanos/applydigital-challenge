@@ -21,4 +21,12 @@ public class HackNewsErrorHandler {
                                                 .build());
     }
 
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<Exception> handleIllegalArgumentException(IllegalArgumentException e) {
+        return ResponseEntity.badRequest().body(HackNewsException.builder()
+                                                    .status(HttpStatus.BAD_REQUEST)
+                                                    .message(e.getMessage())
+                                                .build());
+    }
+
 }
