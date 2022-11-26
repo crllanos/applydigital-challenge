@@ -9,11 +9,12 @@ import com.applydigital.challenge.repository.entity.StoryEntity;
 import com.applydigital.challenge.service.HackNewsService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -53,24 +54,22 @@ public class HackNewsServiceImpl implements HackNewsService {
     }
 
     @Override
-    public List<StoryDTO> listStoriesByAuthor(String author) {
-        List<StoryEntity> list = Optional.of(storyRepository.findStoriesByAuthor(author))
-                .orElseThrow(EntityNotFoundException::new);
-        return parseEntityToDto(list);
+    public Page<StoryEntity> listStoriesByAuthor(String author, int page, int size) {
+        return storyRepository.findStoriesByAuthor(author, PageRequest.of(page, size));
     }
 
     @Override
-    public List<StoryDTO> listStoriesByTag(String tag) {
-        List<StoryEntity> list = Optional.of(storyRepository.findStoriesByTagsContaining(tag))
+    public List<StoryDTO> listStoriesByTag(String tag, int page, int size) {
+        List<StoryEntity> list = Optional.of(storyRepository.findStoriesByTagsContaining(tag, PageRequest.of(page, size)))
                 .orElseThrow(EntityNotFoundException::new);
-        return parseEntityToDto(list);
+        return null; //parseEntityToDto(list);
     }
 
     @Override
-    public List<StoryDTO> listStoriesByTitle(String title) {
-        List<StoryEntity> list = Optional.of(storyRepository.findStoriesByTitle(title))
+    public List<StoryDTO> listStoriesByTitle(String title, int page, int size) {
+        List<StoryEntity> list = Optional.of(storyRepository.findStoriesByTitle(title, PageRequest.of(page, size)))
                 .orElseThrow(EntityNotFoundException::new);
-        return parseEntityToDto(list);
+        return null; // parseEntityToDto(list);
     }
 
     @Override
