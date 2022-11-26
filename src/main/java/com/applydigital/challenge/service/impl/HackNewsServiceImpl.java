@@ -32,7 +32,7 @@ public class FetchNewsServiceImpl implements FetchNewsService {
             storyRepository.save(StoryEntity.builder()
                     .title(s.getTitle())
                     .author(s.getAuthor())
-                    .tags(String.join(",", s.get_tags()))
+                    .tags(String.join(",", s.getTags()))
                     .createdAt(s.getCreatedAt())
                     .url(s.getUrl())
                     .storyId(s.getStoryId())
