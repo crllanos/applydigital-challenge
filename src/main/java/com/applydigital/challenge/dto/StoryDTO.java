@@ -22,7 +22,7 @@ public class StoryDTO {
     private String author;
 
     @JsonProperty("_tags")
-    private List<String> _tags;
+    private List<String> tags;
 
     @JsonProperty("url")
     private String url;

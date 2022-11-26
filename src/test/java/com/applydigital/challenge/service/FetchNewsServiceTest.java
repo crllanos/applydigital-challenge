@@ -5,7 +5,7 @@ import com.applydigital.challenge.client.HackerNewsClientMock;
 import com.applydigital.challenge.dto.NewsDTO;
 import com.applydigital.challenge.dto.StoryDTO;
 import com.applydigital.challenge.repository.StoryRepository;
-import com.applydigital.challenge.service.impl.FetchNewsServiceImpl;
+import com.applydigital.challenge.service.impl.HackNewsServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -21,7 +21,7 @@ import static org.mockito.Mockito.when;
 class FetchNewsServiceTest {
 
     @InjectMocks
-    private FetchNewsServiceImpl fetchNewsService;
+    private HackNewsServiceImpl fetchNewsService;
 
     @Mock
     private HackerNewsClientMock hackerNewsClient;
@@ -51,7 +51,7 @@ class FetchNewsServiceTest {
         return StoryDTO.builder()
                 .title(title)
                 .author(author)
-                ._tags(List.of("tag1","tag2","tag3"))
+                .tags(List.of("tag1","tag2","tag3"))
                 .createdAt(LocalDateTime.now())
                 .url("url")
                 .storyId(storyId)
