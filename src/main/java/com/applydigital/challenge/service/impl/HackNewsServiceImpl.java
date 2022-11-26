@@ -68,7 +68,7 @@ public class HackNewsServiceImpl implements HackNewsService {
 
     @Override
     public Page<StoryEntity> listStoriesByTitle(String title, int page, int size) {
-        return storyRepository.findStoriesByTitle(title, PageRequest.of(page, size));
+        return storyRepository.findStoriesByTitleContaining(title, PageRequest.of(page, size));
     }
 
     @Override

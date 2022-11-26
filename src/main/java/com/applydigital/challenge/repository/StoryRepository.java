@@ -15,7 +15,7 @@ public interface StoryRepository extends PagingAndSortingRepository<StoryEntity,
 
     Page<StoryEntity> findStoriesByTagsContaining(String tag, Pageable pageable);
 
-    Page<StoryEntity> findStoriesByTitle(String title, Pageable pageable);
+    Page<StoryEntity> findStoriesByTitleContaining(String title, Pageable pageable);
 
     //@Query(value = "select s from Stories s where month(s.created_at) = :month", nativeQuery = true)
     @Query(value = "select * from Stories s where extract(MONTH FROM s.created_at) = :month", nativeQuery = true)

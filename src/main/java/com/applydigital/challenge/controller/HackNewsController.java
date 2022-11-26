@@ -30,13 +30,12 @@ public class HackNewsController {
      *
      * @return List<StoryDTO>
      */
-    @GetMapping(value = "/byAuthor/{author}", params = { "page", "size" })
-    public Page<StoryEntity> listStoriesByAuthor(@PathVariable("author") String author,
+    @GetMapping(params = { "author", "page", "size" })
+    public Page<StoryEntity> listStoriesByAuthor(@RequestParam("author") String author,
                                                  @RequestParam("page") int page,
                                                  @RequestParam("size")
                                                      @Min(value = 1, message = "min size: 1")
-                                                     @Max(value = 5, message = "max size: 5")
-                                                     int size){
+                                                     @Max(value = 5, message = "max size: 5") int size){
 
         /**
          * @todo CHALLENGE
@@ -61,9 +60,9 @@ public class HackNewsController {
          * - README
          */
 
-        log.info("GET /api/v1/hacknews/byAuthor/{} page: {}, size: {}", author, page, size);
+        log.info("GET /api/v1/hacknews?author:{} page: {}, size: {}", author, page, size);
         Page<StoryEntity> response = hackNewsService.listStoriesByAuthor(author, page, size);
-        log.info("Response /api/v1/hacknews/byAuthor/{}: {}", author, util.objToJson(response));
+        log.info("Response /api/v1/hacknews?author:{}: {}", author, util.objToJson(response));
 
         return response;
     }
@@ -73,17 +72,16 @@ public class HackNewsController {
      *
      * @return List<StoryDTO>
      */
-    @GetMapping(value = "/byTitle/{title}", params = { "page", "size" })
-    public Page<StoryEntity> listStoriesByTitle(@PathVariable("title") String title,
-                                             @RequestParam("page") int page,
-                                             @RequestParam("size")
-                                                 @Min(value = 1, message = "min size: 1")
-                                                 @Max(value = 5, message = "max size: 5")
-                                                 int size){
+    @GetMapping(params = { "title", "page", "size" })
+    public Page<StoryEntity> listStoriesByTitle(@RequestParam("title") String title,
+                                                @RequestParam("page") int page,
+                                                @RequestParam("size")
+                                                    @Min(value = 1, message = "min size: 1")
+                                                    @Max(value = 5, message = "max size: 5") int size){
 
-        log.info("GET /api/v1/hacknews/byTitle/{} page: {}, size: {}", title, page, size);
+        log.info("GET /api/v1/hacknews?title:{} page: {}, size: {}", title, page, size);
         Page<StoryEntity> response = hackNewsService.listStoriesByTitle(title, page, size);
-        log.info("Response /api/v1/hacknews/byTitle/{}: {}", title, util.objToJson(response));
+        log.info("Response /api/v1/hacknews?title:{}: {}", title, util.objToJson(response));
 
         return response;
     }
@@ -93,31 +91,29 @@ public class HackNewsController {
      *
      * @return List<StoryDTO>
      */
-    @GetMapping(value = "/byTag/{tag}", params = { "page", "size" })
-    public Page<StoryEntity> listStoriesByTag(@PathVariable("tag") String tag,
-                                           @RequestParam("page") int page,
-                                           @RequestParam("size")
-                                               @Min(value = 1, message = "min size: 1")
-                                               @Max(value = 5, message = "max size: 5")
-                                               int size){
+    @GetMapping(params = { "tag", "page", "size" })
+    public Page<StoryEntity> listStoriesByTag(@RequestParam("tag") String tag,
+                                              @RequestParam("page") int page,
+                                              @RequestParam("size")
+                                                  @Min(value = 1, message = "min size: 1")
+                                                  @Max(value = 5, message = "max size: 5") int size){
 
-        log.info("GET /api/v1/hacknews/byTag/{} page: {}, size: {}", tag, page, size);
+        log.info("GET /api/v1/hacknews?tag:{} page: {}, size: {}", tag, page, size);
         Page<StoryEntity> response = hackNewsService.listStoriesByTag(tag, page, size);
-        log.info("Response /api/v1/hacknews/byTag/{}: {}", tag, util.objToJson(response));
+        log.info("Response /api/v1/hacknews?tag:{}: {}", tag, util.objToJson(response));
 
         return response;
     }
 
-    @GetMapping(value = "/byMonth/{month}" ,params = { "page", "size" })
-    public Page<StoryEntity> listStoriesByMonth(@PathVariable("month") String month,
-                                              @RequestParam("page") int page,
-                                              @RequestParam("size")
-                                              @Min(value = 1, message = "min size: 1")
-                                              @Max(value = 5, message = "max size: 5")
-                                              int size){
-        log.info("GET /api/v1/hacknews/byMonth/{} page: {}, size: {}", month, page, size);
+    @GetMapping(params = { "month", "page", "size" })
+    public Page<StoryEntity> listStoriesByMonth(@RequestParam("month") String month,
+                                                @RequestParam("page") int page,
+                                                @RequestParam("size")
+                                                    @Min(value = 1, message = "min size: 1")
+                                                    @Max(value = 5, message = "max size: 5") int size){
+        log.info("GET /api/v1/hacknews?month:{} page: {}, size: {}", month, page, size);
         Page<StoryEntity> response = hackNewsService.listStoriesByMonth(month, page, size);
-        log.info("Response /api/v1/hacknews/byMonth/{}: {}", month, util.objToJson(response));
+        log.info("Response /api/v1/hacknews?month:{}: {}", month, util.objToJson(response));
 
         return response;
 
