@@ -11,7 +11,7 @@ public interface StoryRepository extends JpaRepository<StoryEntity, Long> {
 
     List<StoryEntity> findStoriesByAuthor(String author);
 
-    List<StoryEntity> findStoriesByTagsLike(String tag);
+    List<StoryEntity> findStoriesByTagsContaining(String tag);
 
     List<StoryEntity> findStoriesByTitle(String title);
 

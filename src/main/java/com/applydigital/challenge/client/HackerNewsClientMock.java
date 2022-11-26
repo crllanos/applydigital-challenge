@@ -22,7 +22,7 @@ public class HackerNewsClientMock implements HackerNewsClient {
         return StoryDTO.builder()
                 .title(title)
                 .author(author)
-                .tags(List.of("tag1","tag2","tag3"))
+                .tags(List.of("tag1","tag2","tag3", (storyId==123 ? "Ovejas" : "") ))
                 .createdAt(LocalDateTime.now())
                 .url("url")
                 .storyId(storyId)

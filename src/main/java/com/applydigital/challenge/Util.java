@@ -10,7 +10,7 @@ public class Util {
 
     private final Gson gsonUtil;
 
-    public String objectToJson(Object o){
+    public String objToJson(Object o){
         return gsonUtil.toJson(o);
     }
 }

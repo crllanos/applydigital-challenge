@@ -36,7 +36,7 @@ public class HackNewsServiceImpl implements HackNewsService {
     @Override
     public NewsDTO fetchNews(){
         NewsDTO newsDTO = hackerNewsClient.fetchNews();
-        log.info("fetchNews() response: {}", util.objectToJson(newsDTO));
+        log.info("fetchNews() response: {}", util.objToJson(newsDTO));
         for(StoryDTO s : newsDTO.getHits()){
             storyRepository.save(StoryEntity.builder()
                     .title(s.getTitle())
@@ -61,7 +61,7 @@ public class HackNewsServiceImpl implements HackNewsService {
 
     @Override
     public List<StoryDTO> listStoriesByTag(String tag) {
-        List<StoryEntity> list = Optional.of(storyRepository.findStoriesByTagsLike(String.format("%s%", tag)))
+        List<StoryEntity> list = Optional.of(storyRepository.findStoriesByTagsContaining(tag))
                 .orElseThrow(EntityNotFoundException::new);
         return parseEntityToDto(list);
     }
