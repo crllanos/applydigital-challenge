@@ -13,9 +13,9 @@ public interface StoryRepository extends PagingAndSortingRepository<StoryEntity,
 
     Page<StoryEntity> findStoriesByAuthor(String author, Pageable pageable);
 
-    List<StoryEntity> findStoriesByTagsContaining(String tag, Pageable pageable);
+    Page<StoryEntity> findStoriesByTagsContaining(String tag, Pageable pageable);
 
-    List<StoryEntity> findStoriesByTitle(String title, Pageable pageable);
+    Page<StoryEntity> findStoriesByTitle(String title, Pageable pageable);
 
     //List<StoryEntity> findStoriesByMonth(String month, Pageable pageable);
 }

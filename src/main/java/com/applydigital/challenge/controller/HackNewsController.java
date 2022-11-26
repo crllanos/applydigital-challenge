@@ -75,7 +75,7 @@ public class HackNewsController {
      * @return List<StoryDTO>
      */
     @GetMapping(value = "/byTitle/{title}", params = { "page", "size" })
-    public List<StoryDTO> listStoriesByTitle(@PathVariable("title") String title,
+    public Page<StoryEntity> listStoriesByTitle(@PathVariable("title") String title,
                                              @RequestParam("page") int page,
                                              @RequestParam("size")
                                                  @Min(value = 1, message = "min size: 1")
@@ -83,7 +83,7 @@ public class HackNewsController {
                                                  int size){
 
         log.info("GET /api/v1/hacknews/byTitle/{} page: {}, size: {}", title, page, size);
-        List<StoryDTO> response = hackNewsService.listStoriesByTitle(title, page, size);
+        Page<StoryEntity> response = hackNewsService.listStoriesByTitle(title, page, size);
         log.info("Response /api/v1/hacknews/byTitle/{}: {}", title, util.objToJson(response));
 
         return response;
@@ -95,7 +95,7 @@ public class HackNewsController {
      * @return List<StoryDTO>
      */
     @GetMapping(value = "/byTag/{tag}", params = { "page", "size" })
-    public List<StoryDTO> listStoriesByTag(@PathVariable("tag") String tag,
+    public Page<StoryEntity> listStoriesByTag(@PathVariable("tag") String tag,
                                            @RequestParam("page") int page,
                                            @RequestParam("size")
                                                @Min(value = 1, message = "min size: 1")
@@ -103,12 +103,14 @@ public class HackNewsController {
                                                int size){
 
         log.info("GET /api/v1/hacknews/byTag/{} page: {}, size: {}", tag, page, size);
-        List<StoryDTO> response = hackNewsService.listStoriesByTag(tag, page, size);
+        Page<StoryEntity> response = hackNewsService.listStoriesByTag(tag, page, size);
         log.info("Response /api/v1/hacknews/byTag/{}: {}", tag, util.objToJson(response));
 
         return response;
     }
 
     //@GetMapping(value = "/byMonth/{month}" ,params = { "page", "size" })
+    //public
+
     //@DeleteMapping(value = "/{id}")
 }

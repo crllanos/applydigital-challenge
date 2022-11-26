@@ -32,6 +32,11 @@ public class HackNewsServiceImpl implements HackNewsService {
 
     private final Util util;
 
+    /**
+     * Scheduled cron service for fetching data from Hacker News and persist
+     *
+     * @return NewsDTO
+     */
     //@Scheduled(cron = "0 * * * *") @fixme cron
     @Scheduled(fixedDelay = 3000)
     @Override
@@ -59,38 +64,18 @@ public class HackNewsServiceImpl implements HackNewsService {
     }
 
     @Override
-    public List<StoryDTO> listStoriesByTag(String tag, int page, int size) {
-        List<StoryEntity> list = Optional.of(storyRepository.findStoriesByTagsContaining(tag, PageRequest.of(page, size)))
-                .orElseThrow(EntityNotFoundException::new);
-        return null; //parseEntityToDto(list);
+    public Page<StoryEntity> listStoriesByTag(String tag, int page, int size) {
+        return storyRepository.findStoriesByTagsContaining(tag, PageRequest.of(page, size));
     }
 
     @Override
-    public List<StoryDTO> listStoriesByTitle(String title, int page, int size) {
-        List<StoryEntity> list = Optional.of(storyRepository.findStoriesByTitle(title, PageRequest.of(page, size)))
-                .orElseThrow(EntityNotFoundException::new);
-        return null; // parseEntityToDto(list);
+    public Page<StoryEntity> listStoriesByTitle(String title, int page, int size) {
+        return storyRepository.findStoriesByTitle(title, PageRequest.of(page, size));
     }
 
     @Override
-    public List<StoryDTO> listStoriesByMonth(String month) {
+    public Page<StoryEntity> listStoriesByMonth(String month) {
         return null;
     }
 
-
-
-    private List<StoryDTO> parseEntityToDto(List<StoryEntity> listStories) {
-        List<StoryDTO> response = new ArrayList<>();
-        for(StoryEntity s : listStories){
-            response.add(StoryDTO.builder()
-                    .title(s.getTitle())
-                    .author(s.getAuthor())
-                    .tags(List.of(s.getTags()))
-                    .createdAt(s.getCreatedAt())
-                    .url(s.getUrl())
-                    .storyId(s.getStoryId())
-                    .build());
-        }
-        return response;
-    }
 }

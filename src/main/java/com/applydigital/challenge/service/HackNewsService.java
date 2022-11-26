@@ -15,10 +15,10 @@ public interface HackNewsService {
 
     Page<StoryEntity> listStoriesByAuthor(String author, int page, int size);
 
-    List<StoryDTO> listStoriesByTag(String tag, int page, int size);
+    Page<StoryEntity> listStoriesByTag(String tag, int page, int size);
 
-    List<StoryDTO> listStoriesByTitle(String title, int page, int size);
+    Page<StoryEntity> listStoriesByTitle(String title, int page, int size);
 
-    List<StoryDTO> listStoriesByMonth(String month);
+    Page<StoryEntity> listStoriesByMonth(String month);
 
 }
