@@ -1,7 +1,6 @@
 package com.applydigital.challenge.controller;
 
 import com.applydigital.challenge.Util;
-import com.applydigital.challenge.dto.StoryDTO;
 import com.applydigital.challenge.repository.entity.StoryEntity;
 import com.applydigital.challenge.service.HackNewsService;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import java.util.List;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -46,9 +44,8 @@ public class HackNewsController {
          * - OK filtered by author, _tags, title
          * - OK The whole project has to be uploaded to Gitlab
          * - OK searchable by month word (e.g. september) using the “created_at” field.
-
-         * - paginated results with a maximum of 5 >>> @todo adds full stacktrace (npi)
-         * - At least 30% test coverage (statements) for the server component
+         * - OK paginated results with a maximum of 5 >>> @todo adds full stacktrace on error (npi)
+         * - OK At least 30% test coverage (statements) for the server component
 
          * - allow the user to remove items
          * - JWT must be sent in the headers

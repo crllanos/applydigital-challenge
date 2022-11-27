@@ -1,17 +1,18 @@
-package com.applydigital.challenge.client;
+package com.applydigital.challenge;
 
 import com.applydigital.challenge.dto.NewsDTO;
 import com.applydigital.challenge.dto.StoryDTO;
-import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Component
-public class HackerNewsClientMock implements HackerNewsClient {
+/**
+ * Util class for mocking objects
+ *
+ */
+public class DataForTest {
 
-    @Override
-    public NewsDTO fetchNews() {
+    protected NewsDTO mockNews() {
         return NewsDTO.builder().hits(List.of(
                 storyMock(123,"Phillip K. Dick", "Ovejas"),
                 storyMock(456,"Arthur C. Clark", "Ramah")
@@ -22,7 +23,7 @@ public class HackerNewsClientMock implements HackerNewsClient {
         return StoryDTO.builder()
                 .title(title)
                 .author(author)
-                .tags(List.of("tag1","tag2","tag3", (storyId==123 ? "Ovejas" : "") ))
+                .tags(List.of("tag1","tag2","tag3"))
                 .createdAt(LocalDateTime.now())
                 .url("url")
                 .storyId(storyId)

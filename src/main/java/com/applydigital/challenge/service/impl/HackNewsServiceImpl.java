@@ -2,10 +2,8 @@ package com.applydigital.challenge.service.impl;
 
 import com.applydigital.challenge.Util;
 import com.applydigital.challenge.client.HackerNewsClient;
-import com.applydigital.challenge.client.HackerNewsClientMock;
 import com.applydigital.challenge.dto.NewsDTO;
 import com.applydigital.challenge.dto.StoryDTO;
-import com.applydigital.challenge.exception.HackNewsException;
 import com.applydigital.challenge.repository.StoryRepository;
 import com.applydigital.challenge.repository.entity.StoryEntity;
 import com.applydigital.challenge.service.HackNewsService;
