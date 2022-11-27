@@ -10,10 +10,9 @@ import org.springframework.http.HttpStatus;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class HackNewsException extends RuntimeException {
+public class HackNewsException {
 
     private HttpStatus status;
     private String message;
-    private Throwable e;
 
 }

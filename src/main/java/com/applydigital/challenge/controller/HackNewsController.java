@@ -32,8 +32,8 @@ public class HackNewsController {
     public Page<StoryEntity> listStoriesByAuthor(@RequestParam("author") String author,
                                                  @RequestParam("page") int page,
                                                  @RequestParam("size")
-                                                     @Min(value = 1, message = "min size: 1")
-                                                     @Max(value = 5, message = "max size: 5") int size){
+                                                     @Min(value = 0, message = "min size = 0")
+                                                     @Max(value = 5, message = "max size = 5") int size){
 
         /**
          * @todo CHALLENGE
@@ -48,6 +48,7 @@ public class HackNewsController {
          * - OK At least 30% test coverage (statements) for the server component
 
          * - allow the user to remove items
+
          * - JWT must be sent in the headers
          * - Dockerized
          * - docker-compose
@@ -73,8 +74,8 @@ public class HackNewsController {
     public Page<StoryEntity> listStoriesByTitle(@RequestParam("title") String title,
                                                 @RequestParam("page") int page,
                                                 @RequestParam("size")
-                                                    @Min(value = 1, message = "min size: 1")
-                                                    @Max(value = 5, message = "max size: 5") int size){
+                                                    @Min(value = 0, message = "min size = 0")
+                                                    @Max(value = 5, message = "max size = 5") int size){
 
         log.info("GET /api/v1/hacknews?title:{} page: {}, size: {}", title, page, size);
         Page<StoryEntity> response = hackNewsService.listStoriesByTitle(title, page, size);
@@ -92,8 +93,8 @@ public class HackNewsController {
     public Page<StoryEntity> listStoriesByTag(@RequestParam("tag") String tag,
                                               @RequestParam("page") int page,
                                               @RequestParam("size")
-                                                  @Min(value = 1, message = "min size: 1")
-                                                  @Max(value = 5, message = "max size: 5") int size){
+                                                  @Min(value = 0, message = "min size = 0")
+                                                  @Max(value = 5, message = "max size = 5") int size){
 
         log.info("GET /api/v1/hacknews?tag:{} page: {}, size: {}", tag, page, size);
         Page<StoryEntity> response = hackNewsService.listStoriesByTag(tag, page, size);
@@ -106,8 +107,8 @@ public class HackNewsController {
     public Page<StoryEntity> listStoriesByMonth(@RequestParam("month") String month,
                                                 @RequestParam("page") int page,
                                                 @RequestParam("size")
-                                                    @Min(value = 1, message = "min size: 1")
-                                                    @Max(value = 5, message = "max size: 5") int size){
+                                                    @Min(value = 0, message = "min size = 0")
+                                                    @Max(value = 5, message = "max size = 5") int size){
         log.info("GET /api/v1/hacknews?month:{} page: {}, size: {}", month, page, size);
         Page<StoryEntity> response = hackNewsService.listStoriesByMonth(month, page, size);
         log.info("Response /api/v1/hacknews?month:{}: {}", month, util.objToJson(response));
@@ -116,5 +117,12 @@ public class HackNewsController {
 
     }
 
-    //@DeleteMapping(value = "/{id}")
+    @DeleteMapping(value = "/{id}")
+    public StoryEntity deleteStory(@PathVariable("id") Long id){
+        log.info("DELETE /api/v1/hacknews/{}", id);
+        StoryEntity story = hackNewsService.remove(id);
+        log.info("Response /api/v1/hacknews/{}", util.objToJson(story));
+
+        return story;
+    }
 }

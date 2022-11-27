@@ -4,6 +4,7 @@ import com.applydigital.challenge.Util;
 import com.applydigital.challenge.client.HackerNewsClient;
 import com.applydigital.challenge.dto.NewsDTO;
 import com.applydigital.challenge.dto.StoryDTO;
+import com.applydigital.challenge.exception.HackNewsException;
 import com.applydigital.challenge.repository.StoryRepository;
 import com.applydigital.challenge.repository.entity.StoryEntity;
 import com.applydigital.challenge.service.HackNewsService;
@@ -15,7 +16,9 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
+import javax.persistence.EntityNotFoundException;
 import java.time.Month;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -71,12 +74,16 @@ public class HackNewsServiceImpl implements HackNewsService {
 
     @Override
     public Page<StoryEntity> listStoriesByMonth(String month, int page, int size) {
-        try{
-            Month m = Month.valueOf(month.toUpperCase());
-            return storyRepository.findStoriesByMonth(m.getValue(), PageRequest.of(page, size));
-        }catch (Exception e){
-            throw new IllegalArgumentException(e);
-        }
+        Month m = Month.valueOf(month.toUpperCase());
+        return storyRepository.findStoriesByMonth(m.getValue(), PageRequest.of(page, size));
+    }
+
+    @Override
+    public StoryEntity remove(Long id) {
+        StoryEntity story = storyRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(String.format("story %d not found", id)));
+        storyRepository.delete(story);
+        return story;
     }
 
 }

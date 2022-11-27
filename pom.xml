@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.applydigital</groupId>
 	<artifactId>challenge</artifactId>
-	<version>0.0.6</version>
+	<version>0.0.7</version>
 	<name>challenge</name>
 	<description>Back End Developer Test</description>
 

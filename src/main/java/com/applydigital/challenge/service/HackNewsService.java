@@ -21,4 +21,5 @@ public interface HackNewsService {
 
     Page<StoryEntity> listStoriesByMonth(String month, int page, int size);
 
+    StoryEntity remove(Long id);
 }
