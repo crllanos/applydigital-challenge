@@ -1,12 +1,11 @@
 package com.applydigital.challenge.service.impl;
 
-import com.applydigital.challenge.Util;
+import com.applydigital.challenge.util.Util;
 import com.applydigital.challenge.client.HackerNewsClient;
 import com.applydigital.challenge.dto.NewsDTO;
 import com.applydigital.challenge.dto.StoryDTO;
-import com.applydigital.challenge.exception.HackNewsException;
 import com.applydigital.challenge.repository.StoryRepository;
-import com.applydigital.challenge.repository.entity.StoryEntity;
+import com.applydigital.challenge.entity.StoryEntity;
 import com.applydigital.challenge.service.HackNewsService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,10 +17,9 @@ import org.springframework.util.ObjectUtils;
 
 import javax.persistence.EntityNotFoundException;
 import java.time.Month;
-import java.util.Optional;
 
-@Service
 @Slf4j
+@Service
 @RequiredArgsConstructor
 public class HackNewsServiceImpl implements HackNewsService {
 
@@ -37,7 +35,7 @@ public class HackNewsServiceImpl implements HackNewsService {
      * @return NewsDTO
      */
     //@Scheduled(cron = "0 * * * *") @fixme cron
-    @Scheduled(fixedDelay = 30000)
+    @Scheduled(fixedDelay = 300000)
     @Override
     public NewsDTO fetchNews(){
         NewsDTO newsDTO = hackerNewsClient.fetchNews();

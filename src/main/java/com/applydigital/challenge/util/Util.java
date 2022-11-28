@@ -1,4 +1,4 @@
-package com.applydigital.challenge;
+package com.applydigital.challenge.util;
 
 import com.google.gson.Gson;
 import lombok.RequiredArgsConstructor;

@@ -1,7 +1,7 @@
 package com.applydigital.challenge.service.impl;
 
 import com.applydigital.challenge.DataForTest;
-import com.applydigital.challenge.Util;
+import com.applydigital.challenge.util.Util;
 import com.applydigital.challenge.client.HackerNewsClient;
 import com.applydigital.challenge.repository.StoryRepository;
 import org.junit.jupiter.api.Test;

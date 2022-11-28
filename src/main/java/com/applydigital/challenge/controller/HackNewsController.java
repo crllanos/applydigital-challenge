@@ -1,7 +1,7 @@
 package com.applydigital.challenge.controller;
 
-import com.applydigital.challenge.Util;
-import com.applydigital.challenge.repository.entity.StoryEntity;
+import com.applydigital.challenge.util.Util;
+import com.applydigital.challenge.entity.StoryEntity;
 import com.applydigital.challenge.service.HackNewsService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -46,10 +46,10 @@ public class HackNewsController {
          * - OK searchable by month word (e.g. september) using the “created_at” field.
          * - OK paginated results with a maximum of 5 >>> @todo adds full stacktrace on error (npi)
          * - OK At least 30% test coverage (statements) for the server component
-
-         * - allow the user to remove items
+         * - OK allow the user to remove items
 
          * - JWT must be sent in the headers
+
          * - Dockerized
          * - docker-compose
 

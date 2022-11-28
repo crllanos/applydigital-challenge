@@ -1,4 +1,4 @@
-package com.applydigital.challenge.repository.entity;
+package com.applydigital.challenge.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
