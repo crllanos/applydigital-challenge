@@ -1,6 +1,7 @@
 package com.applydigital.challenge.config;
 
 import com.applydigital.challenge.filter.AuthenticationFilter;
+import com.applydigital.challenge.filter.AuthorizationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +14,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -21,19 +23,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final UserDetailsService userDetailsService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
-    private final static String api = "/api/v1/hacknews/**";
-    private final static String roleAdmin = "ROLE_ADMIN";
-    private final static String roleJournalist = "ROLE_JOURNALIST";
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        AuthenticationFilter filter = new AuthenticationFilter(authenticationManagerBean());
+        filter.setFilterProcessesUrl("/api/login/**");
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.authorizeRequests().antMatchers("/login").permitAll();
-        http.authorizeRequests().antMatchers(HttpMethod.GET, api).hasAnyAuthority(roleJournalist);
-        http.authorizeRequests().antMatchers(HttpMethod.DELETE, api).hasAnyAuthority(roleAdmin);
+        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/v1/hacknews/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_JOURNALIST");
+        http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/api/v1/hacknews/**").hasAnyAuthority("ROLE_ADMIN");
         http.authorizeRequests().anyRequest().authenticated();
-        http.addFilter(new AuthenticationFilter(this.authenticationManager()));
+        http.addFilter(filter);
+        http.addFilterBefore(new AuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 
     @Override
@@ -43,7 +45,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public AuthenticationManager authenticationManager() throws Exception {
-        return super.authenticationManager();
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
     }
 }
