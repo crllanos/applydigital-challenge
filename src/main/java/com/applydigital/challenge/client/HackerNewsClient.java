@@ -1,16 +1,15 @@
 package com.applydigital.challenge.client;
 
-import com.applydigital.challenge.entity.Story;
+import com.applydigital.challenge.config.FeignClientConfig;
+import com.applydigital.challenge.dto.NewsDTO;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.GetMapping;
 
-import java.util.List;
-
-@FeignClient(value = "hackernews", url = "https://hn.algolia.com/api/v1")
+@FeignClient(name = "hackernews", url = "${feign.hackernews.url}", configuration = FeignClientConfig.class)
 public interface HackerNewsClient {
 
-    @RequestMapping(method = RequestMethod.GET, value = "/search_by_date?query=java")
-    List<Story> getStories();
+    @GetMapping(value = "/search_by_date?query=java", consumes = MediaType.APPLICATION_JSON_VALUE)
+    NewsDTO fetchNews();
 
 }
