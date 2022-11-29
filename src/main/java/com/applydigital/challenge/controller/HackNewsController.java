@@ -49,9 +49,7 @@ public class HackNewsController {
          * - OK allow the user to remove items
          * - OK JWT must be sent in the headers
 
-         * - Dockerized
-
-         * - docker-compose
+         * - OK docker-compose
 
          * ? Tests and linters should run on a GitLab pipeline (gitlab-ci.yml)
          * ? API Doc: Swagger, should be exposed at /api/docs
