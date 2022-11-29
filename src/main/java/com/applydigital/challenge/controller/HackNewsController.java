@@ -47,10 +47,10 @@ public class HackNewsController {
          * - OK paginated results with a maximum of 5 >>> @todo adds full stacktrace on error (npi)
          * - OK At least 30% test coverage (statements) for the server component
          * - OK allow the user to remove items
-
-         * - JWT must be sent in the headers
+         * - OK JWT must be sent in the headers
 
          * - Dockerized
+
          * - docker-compose
 
          * ? Tests and linters should run on a GitLab pipeline (gitlab-ci.yml)
